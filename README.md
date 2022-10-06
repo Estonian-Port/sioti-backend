@@ -1,2 +1,2 @@
-# siote-backend
-Sistema de IOT para Empresas
+# sioti-backend
+Sistema de IOT para Industrias
