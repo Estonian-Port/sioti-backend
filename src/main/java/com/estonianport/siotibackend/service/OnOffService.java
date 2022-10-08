@@ -5,22 +5,18 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.estonianport.siotibackend.commons.genericService.GenericServiceImpl;
-import com.estonianport.siotibackend.dao.McuDao;
-import com.estonianport.siotibackend.model.Mcu;
+import com.estonianport.siotibackend.dao.OnOffDao;
+import com.estonianport.siotibackend.model.OnOff;
 
 @Service
-public class McuService extends GenericServiceImpl<Mcu, Long> {
+public class OnOffService extends GenericServiceImpl<OnOff, Long> {
 	
 	@Autowired
-	private McuDao mcuDao;
+	private OnOffDao onOffDao;
 
 	@Override
-	public CrudRepository<Mcu, Long> getDao() {
-		return mcuDao;
-	}
-	
-	public Mcu getMcuByNombre(String nombre) {
-		return mcuDao.getMcuByNombre(nombre);
+	public CrudRepository<OnOff, Long> getDao() {
+		return onOffDao;
 	}
 
 }

@@ -6,4 +6,6 @@ import com.estonianport.siotibackend.model.Mcu;
 
 public interface McuDao extends CrudRepository<Mcu, Long> {
 
+	Mcu getMcuByNombre(String nombre);
+
 }
