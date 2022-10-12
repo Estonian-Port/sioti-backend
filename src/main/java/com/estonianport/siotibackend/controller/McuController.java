@@ -28,7 +28,7 @@ public class McuController {
 		return mcuService.get(id);
 	}
 
-	@GetMapping(value = "/allMcu")
+	@GetMapping(value = "/getAllMcu")
 	public List<Mcu> getAll(){
 		return mcuService.getAll();
 	}

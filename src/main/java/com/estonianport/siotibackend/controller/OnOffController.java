@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.estonianport.siotibackend.model.Mcu;
 import com.estonianport.siotibackend.model.OnOff;
 import com.estonianport.siotibackend.service.McuService;
 import com.estonianport.siotibackend.service.OnOffService;
@@ -33,9 +35,14 @@ public class OnOffController {
 		return onOffService.get(id);
 	}
 
-	@GetMapping(value = "/allOnOff")
+	@GetMapping(value = "/getAllOnOff")
 	public List<OnOff> getAll(){
 		return onOffService.getAll();
+	}
+
+	@GetMapping(value = "/getAllOnOffByMcu/{id}")
+	public List<OnOff> getAll(@PathVariable Long id){
+		return onOffService.getAllOnOffByMcu(mcuService.get(id));
 	}
 
 	@PostMapping(value = "/saveOnOff")
