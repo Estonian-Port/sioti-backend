@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.estonianport.siotibackend.model.Mcu;
 import com.estonianport.siotibackend.model.OnOff;
 import com.estonianport.siotibackend.service.McuService;
 import com.estonianport.siotibackend.service.OnOffService;
