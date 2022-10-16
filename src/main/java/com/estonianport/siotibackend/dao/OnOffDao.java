@@ -11,4 +11,6 @@ public interface OnOffDao extends CrudRepository<OnOff, Long> {
 
 	List<OnOff> getAllOnOffByMcu(Mcu muc);
 
+	OnOff findTopByOrderByIdDesc();
+
 }

@@ -25,4 +25,8 @@ public class OnOffService extends GenericServiceImpl<OnOff, Long> {
 	public List<OnOff> getAllOnOffByMcu(Mcu muc) {
 		return onOffDao.getAllOnOffByMcu(muc);
 	}
+
+	public OnOff findTopByOrderByIdDescByMcu(Mcu mcu) {
+		return onOffDao.findTopByOrderByIdDesc();
+	}
 }

@@ -18,11 +18,6 @@ import lombok.Setter;
 @Setter
 public class OnOff {
 
-	public enum Action {
-		OFF,
-		ON
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -32,7 +27,7 @@ public class OnOff {
 	private Mcu mcu;
 	
 	@Column
-	private Action action;
+	private Boolean action;
 
 	@Column
 	private LocalDateTime localDateTime;
