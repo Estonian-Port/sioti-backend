@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.estonianport.siotibackend.commons.dateUtil.DateUtil;
 import com.estonianport.siotibackend.model.Mcu;
 import com.estonianport.siotibackend.model.OnOff;
 import com.estonianport.siotibackend.service.McuService;
@@ -58,22 +57,15 @@ public class McuController {
 	}
 	
 	@GetMapping(value = "/getTiempoEncendido/{id}")
-	public LocalDateTime getTiempoEncendido(@PathVariable Long id){
+	public long getTiempoEncendido(@PathVariable Long id){
 		List<OnOff> onOffList = onOffService.getAllOnOffByMcu(mcuService.get(id));
 		if(!onOffList.isEmpty()) {
 			OnOff last = onOffList.get(onOffList.size() - 1);
-
-			Duration diference = Duration.between(last.getLocalDateTime(), LocalDateTime.now());
-			if(diference.toMinutes() < 1) {
-				return DateUtil.createFechaConHora("01-01-2000", "00:00");
+			if(last.getAction()) {
+				Duration diference = Duration.between(last.getLocalDateTime(), LocalDateTime.now());
+				return diference.getSeconds();
 			}
-			if(diference.toMinutes() <= 9) {
-				return DateUtil.createFechaConHora("01-01-2000", "00:0" + Long.toString(diference.toMinutes()));
-			}
-			return DateUtil.createFechaConHora("01-01-2000", "00:" + Long.toString(diference.toMinutes()));
 		}
-		else {
-			return DateUtil.createFechaConHora("01-01-2000", "00:00");
-		}
+		return 0;
 	}
 }
