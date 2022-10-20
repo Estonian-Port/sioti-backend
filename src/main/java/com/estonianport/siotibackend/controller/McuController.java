@@ -60,15 +60,20 @@ public class McuController {
 	@GetMapping(value = "/getTiempoEncendido/{id}")
 	public LocalDateTime getTiempoEncendido(@PathVariable Long id){
 		List<OnOff> onOffList = onOffService.getAllOnOffByMcu(mcuService.get(id));
-		OnOff last = onOffList.get(onOffList.size() - 1);
+		if(!onOffList.isEmpty()) {
+			OnOff last = onOffList.get(onOffList.size() - 1);
 
-		Duration diference = Duration.between(last.getLocalDateTime(), LocalDateTime.now());
-		if(diference.toMinutes() < 1) {
+			Duration diference = Duration.between(last.getLocalDateTime(), LocalDateTime.now());
+			if(diference.toMinutes() < 1) {
+				return DateUtil.createFechaConHora("01-01-2000", "00:00");
+			}
+			if(diference.toMinutes() <= 9) {
+				return DateUtil.createFechaConHora("01-01-2000", "00:0" + Long.toString(diference.toMinutes()));
+			}
+			return DateUtil.createFechaConHora("01-01-2000", "00:" + Long.toString(diference.toMinutes()));
+		}
+		else {
 			return DateUtil.createFechaConHora("01-01-2000", "00:00");
 		}
-		if(diference.toMinutes() <= 9) {
-			return DateUtil.createFechaConHora("01-01-2000", "00:0" + Long.toString(diference.toMinutes()));
-		}
-		return DateUtil.createFechaConHora("01-01-2000", "00:" + Long.toString(diference.toMinutes()));
 	}
 }
